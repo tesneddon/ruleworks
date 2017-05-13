@@ -3,6 +3,7 @@
 RuleWorks - Rules based application development tool.
 
 Copyright (C) 1999  Compaq Computer Corporation
+Copyright (C) 2017  Endless Software Solutions
 
 This program is free software; you can redistribute it and/or modify it 
 under the terms of the GNU General Public License as published by the 
@@ -33,12 +34,14 @@ Email: info@ruleworks.co.uk
 **  MODIFIED BY:
 **	DEC	Digital Equipment Corporation
 **	CPQ	Compaq Computer Corporation
+**	ESS	Endless Software Solutions
 **
 **  MODIFICATION HISTORY:
 **
 **	26-Jan-1993	DEC	Initial version (subset of rul_scan.lex)
 **	15-Sep-1999	DEC	Add %option noyywrap
 **	01-Dec-1999	CPQ	Release with GPL
+**	14-May-2017	ESS	Remove YY_PROTO. Corrected yy_current_buffer
 */
 
 /*
@@ -100,7 +103,7 @@ static long           SL_line_count;
 #ifdef YY_DECL
 #undef YY_DECL
 #endif
-#define YY_DECL int rul__atomizer YY_PROTO(( void )) 
+#define YY_DECL int rul__atomizer ( void ) 
 
 	/*
 	**  The rts atomizer uses the IOS substream to get the input characters
@@ -381,7 +384,7 @@ rul__atom_get_atom (Molecule *mol)
 
 void rul__atom_restart (FILE *file)
 {
-  if (yy_current_buffer)
+  if (YY_CURRENT_BUFFER)
     yyrestart ((file == NULL) ? stdin : file);
 }
 

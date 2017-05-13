@@ -3,6 +3,7 @@
 RuleWorks - Rules based application development tool.
 
 Copyright (C) 1999  Compaq Computer Corporation
+Copyright (C) 2017  Endless Software Solutions
 
 This program is free software; you can redistribute it and/or modify it 
 under the terms of the GNU General Public License as published by the 
@@ -36,6 +37,7 @@ Email: info@ruleworks.co.uk
 **  MODIFIED BY:
 **	DEC	Digital Equipment Corporation
 **	CPQ	Compaq Computer Corporation
+**	ESS	Endless Software Solutions
 **
 **  MODIFICATION HISTORY:
 **
@@ -46,6 +48,7 @@ Email: info@ruleworks.co.uk
 **	30-Mar-1994	DEC	Rename yylval to tokval to avoid yacc conflict
 **	15-Sep-1999	DEC	Add %option noyywrap
 **	01-Dec-1999	CPQ	Release with GPL
+**	14-May-2017	ESS	Remove YY_PROTO.
 */
 
 /*
@@ -153,7 +156,7 @@ static Token_Value tokval;	/* Token values for ints and floats are
  */
 #ifdef FLEX_SCANNER
 #undef YY_DECL
-#define YY_DECL Token_Type yylex YY_PROTO(( void )) 
+#define YY_DECL Token_Type yylex ( void ) 
 #endif
 
 #ifdef YY_INPUT
