@@ -1,1 +1,4 @@
+bin/*
 build/*.[aoch]
+library/*.a
+include/rul_gend.h
