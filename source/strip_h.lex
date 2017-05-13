@@ -3,6 +3,7 @@
 RuleWorks - Rules based application development tool.
 
 Copyright (C) 1999  Compaq Computer Corporation
+Copyright (C) 2017  Endless Software Solutions
 
 This program is free software; you can redistribute it and/or modify it 
 under the terms of the GNU General Public License as published by the 
@@ -33,7 +34,6 @@ Email: info@ruleworks.co.uk
 #ifndef fileno
 extern int fileno(FILE *fp);
 #endif
-extern int strlen(const unsigned char *str);
 
 static long debug_lex = 0;
 static long include_it = FALSE;
