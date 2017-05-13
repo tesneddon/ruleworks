@@ -1,0 +1,203 @@
+--
+--  SQL_SQLMOD.SQLMOD  -  RULEWORKS interface SQL Module Language procedures
+--
+-----------------------------------------------------------------------------
+--
+-- RuleWorks - Rules based application development tool.
+--
+-- Copyright (C) 1999  Compaq Computer Corporation
+--
+-- This program is free software; you can redistribute it and/or modify it 
+-- under the terms of the GNU General Public License as published by the 
+-- Free Software Foundation; either version 2 of the License, or any later 
+-- version. 
+--
+-- This program is distributed in the hope that it will be useful, but 
+-- WITHOUT ANY WARRANTY; without even the implied warranty of 
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General 
+-- Public License for more details. 
+-- 
+-- You should have received a copy of the GNU General Public License along 
+-- with this program; if not, write to the Free Software Foundation, 
+-- Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+--
+-- Email: info@ruleworks.co.uk
+                                   --
+-----------------------------------------------------------------------------
+
+--
+-- FACILITY:
+--	RULEWORKS SQL interface
+--
+-- ABSTRACT:
+--	This module contains the RULEWORKS SQL interface SQL Module Language
+--	procedures.
+--
+--	Also see the following RULEWORKS SQL interface documents:
+--	    - functional spec (OPS_SQL_SPEC.TXT)
+--	    - design document (OPS_SQL_DESIGN.TXT).
+--
+-- MODIFIED BY:
+--	DEC Digital Equipment Corporation
+--	CPQ Compaq Computer Corporation
+--
+-- MODIFICATION HISTORY:
+--
+--	13-Sep-1991	DEC	Initial version
+--	01-Dec-1999	CPQ	Release with GPL
+--
+--
+
+
+-- SQL_SQLMOD	(SQL module language procedures for RULEWORKS SQL interface)
+--
+--   Includes following procedures:
+--
+--	RUL__SQLMOD_COMMIT	    (commit any DB changes; end transaction)
+--	RUL__SQLMOD_DETACH	    (detach from database schema)
+--	RUL__SQLMOD_EXEC    used by:
+			    -- RUL__sql_attach
+			    -- RUL__sql_delete
+			    -- RUL__sql_start)
+--	RUL__SQLMOD_FETCH_PREPARE   (prepare FETCH RSE expression)
+--	RUL__SQLMOD_FETCH_OPEN	    (open FETCH cursor)
+--	RUL__SQLMOD_FETCH	    (perform the actual data FETCH)
+--	RUL__SQLMOD_FETCH_CLOSE	    (close the FETCH cursor)
+--	RUL__SQLMOD_ROLLBACK	    (rollback any DB changes; end transaction)
+--
+-- =============================================================================
+
+MODULE RTS_SQL_MOD
+
+	LANGUAGE C
+
+	AUTHORIZATION  RUL$SQL
+
+-- =============================================================================
+
+-- Declarations :
+
+	DECLARE SEL CURSOR FOR DYN_STMT		    -- ie DYN_STMT is prepared
+						    --   (dynamically) below
+
+	DECLARE SYSTBL_CURSOR CURSOR FOR SYSTBL_SELECT
+	
+-- =============================================================================
+
+	PROCEDURE RUL__SQLMOD_COMMIT
+			SQLCODE;
+
+		COMMIT;
+
+--------------------------------------------------------------------------------
+
+        PROCEDURE RUL__SQLMOD_DETACH
+			SQLCODE;
+
+		DISCONNECT DEFAULT;
+
+--------------------------------------------------------------------------------
+
+        PROCEDURE RUL__SQLMOD_EXEC
+			SQLCODE
+			:p_stmt   CHAR(8192);
+
+		EXECUTE IMMEDIATE :p_stmt;
+
+-- =============================================================================
+
+	PROCEDURE RUL__SQLMOD_FETCH_PREPARE
+			SQLCODE
+			:p_stmt	    CHAR(8192);
+
+		PREPARE DYN_STMT FROM :p_stmt;
+
+--------------------------------------------------------------------------------
+
+        PROCEDURE RUL__SQLMOD_FETCH_DESCRIBE
+			SQLCODE
+			SQLDA;
+				
+                DESCRIBE DYN_STMT SELECT LIST INTO SQLDA;
+		
+--------------------------------------------------------------------------------
+
+	PROCEDURE RUL__SQLMOD_FETCH_OPEN
+			SQLCODE;
+
+		OPEN SEL;
+
+--------------------------------------------------------------------------------
+
+	PROCEDURE RUL__SQLMOD_FETCH
+			SQLCODE
+			SQLDA;
+
+		FETCH SEL USING DESCRIPTOR SQLDA;
+--------------------------------------------------------------------------------
+
+	PROCEDURE RUL__SQLMOD_FETCH_CLOSE
+			SQLCODE;
+
+		CLOSE SEL;
+
+--------------------------------------------------------------------------------
+
+        PROCEDURE RUL__SQLMOD_ROLLBACK
+			SQLCODE;
+
+		ROLLBACK;
+
+-- =============================================================================
+--  Procedures used to access Rdb system table data:
+
+	PROCEDURE RUL__SQLMOD_SYSTBL_PREP
+			SQLCODE
+			:p_stmt	    CHAR(8192);
+
+		PREPARE SYSTBL_SELECT FROM :p_stmt;
+
+----  Can use param rather than statement name, ie use same procedure for both
+---- fetches from system tables; or can test integer param, to determine if
+---- statement has been prepared???
+----  May need to declare dynamic cursor then, if param used for prepared
+---- statement???
+
+--------------------------------------------------------------------------------
+
+	PROCEDURE RUL__SQLMOD_SYSTBL_DESC_OUT
+			SQLCODE
+			SQLDA;
+
+                DESCRIBE SYSTBL_SELECT SELECT LIST INTO SQLDA;
+
+--------------------------------------------------------------------------------
+
+	PROCEDURE RUL__SQLMOD_SYSTBL_DESC
+			SQLCODE
+			SQLDA;
+
+		DESCRIBE SYSTBL_SELECT MARKERS INTO SQLDA;
+
+--------------------------------------------------------------------------------
+
+	PROCEDURE RUL__SQLMOD_SYSTBL_OPEN
+			SQLCODE
+			SQLDA;
+
+		OPEN SYSTBL_CURSOR USING DESCRIPTOR SQLDA;
+
+--------------------------------------------------------------------------------
+
+	PROCEDURE RUL__SQLMOD_SYSTBL_FETCH
+			SQLCODE
+			SQLDA;
+
+		FETCH SYSTBL_CURSOR USING DESCRIPTOR SQLDA;
+--------------------------------------------------------------------------------
+
+	PROCEDURE RUL__SQLMOD_SYSTBL_CLOSE
+			SQLCODE;
+
+		CLOSE SYSTBL_CURSOR;
+

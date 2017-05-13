@@ -1,0 +1,121 @@
+1 RuleWorks
+
+ The RULEWORK command invokes the RuleWorks compiler to compile
+ a RuleWorks source file into a C language code file.
+
+ Format of the RULEWORK command:
+
+        $ RULEWORK [/qualifier...] file-spec
+
+2 Parameters
+
+ The one parameter associated with the RuleWorks command is the
+ file specification of the RuleWorks language source code file
+ that is to be processed by the compiler.  The default file type
+ for RuleWorks source files is .RUL.
+
+2 Qualifiers
+
+ Qualifiers specify instructions to the compiler.  Qualifiers may be
+ placed before or after the file specification.  The following table
+ lists all the RuleWorks qualifiers and shows the default settings:
+
+    Qualifier:                          Default (without qualifier):
+ 
+    /DEBUG[=(YES,NO,MAYBE)]            /DEBUG=NO
+    /ERROR=file-spec                   (errors reported to SYS$ERROR:)
+    /OUTPUT=file-spec                  /OUTPUT=*.c
+    /OPTIMIZE[=(REINVOCATION,SPACE)]   /OPTIMIZE=SPACE
+    /QUIET                             (identification messages generated)
+    /USEDIRECTORY=directory-spec       /USE=(directory for declaration files)
+
+2 Release Notes
+
+ To obtain a copy of the release notes for RuleWorks, type or print the 
+ file called SYS$HELP:RULAXP020.RELEASE_NOTES on ALPHA AXP or the file
+ called SYS$HELP:RUL020.RELEASE_NOTES on VAX.
+
+2 /DEBUG[=(YES,NO,MAYBE)]
+
+ RuleWorks includes language specific debugging features that provide useful
+ information at run-time, such as the contents of working memory and the
+ current conflict set.  The /DEBUG qualifier is used to control two things:
+ the inclusion of additional debugging information in the generated code,
+ and the invocation of the RuleWorks language specific debugger.
+
+ The /DEBUG qualifier supports the following modes:
+
+    YES           Requests that the compiler include the additional
+                  debugging information in the generated code, and also
+                  requests that the RuleWorks language specific debugger
+                  be invoked immediately upon starting the execution of
+                  any ENTRY-BLOCK in the file being compiled.
+
+                  This is the default if the /DEBUG qualifier is specified
+                  without an argument.
+
+    MAYBE         Requests that the compiler include the additional
+                  debugging information in the generated code, but that
+                  RuleWorks debugger should not be automatically invoked.
+                  In this case, the RuleWorks debugger can be invoked under
+                  the programmers control by either the execution of a
+                  DEBUG action, or by a call to the API routine, rul_debug.
+
+    NO            Indicates that the compiler should not include the
+                  additional debugging information in the generated code,
+                  making it impossible to use the RuleWorks debugger on
+                  any ENTRY-BLOCK in the file being compiled.
+
+                  This is the default if /DEBUG was not specified.
+
+2 /ERROR=file-spec
+
+ Generates a error file.  The error file defaults to a file in the
+ current directory with the name of the RuleWorks source file
+ and a .ERR file type.  To specify a different name for the error file,
+ use the /ERROR qualifier with a file specification.
+
+ The absence of the /ERROR qualifier suppresses the generation of a
+ error file.  By default, all error messages are sent to SYS$ERROR.
+
+2 /OPTIMIZE[=(REINVOCATION,SPACE)]
+
+ Indicates whether match information should be retained whenever an
+ ENTRY-BLOCK returns control to its caller.  By default all match
+ information is freed when an ENTRY-BLOCK returns.  This option
+ does not affect the run-time behavior in any way, except the
+ run-time memory requirements and the total execution time.  See
+ the manual for more details.
+
+ The /OPTIMIZE qualifier supports the following modes:
+
+    REINVOCATION  Indicates that the generated code should retain
+                  match information when an ENTRY-BLOCK returns.
+                  This option should only be used when an ENTRY-BLOCK
+                  is being called repeatedly.
+
+                  This is the default if the /OPTIMIZE qualifier is
+                  specified without an argument.
+
+    SPACE         Indicates that the generated code should not retain
+                  any match information when an ENTRY-BLOCK returns.
+
+                  This is the default if /OPTIMIZE was not specified.
+
+2 /OUTPUT=file-spec
+
+ Specifies a name for the output file.  The default for the output
+ is a file in the current directory with the name of the RuleWorks
+ source file from the command line and a .C file type.  To specify a 
+ different name for the output file, use the /OUTPUT qualifier with a file
+ specification.
+
+2 /QUIET
+
+ Suppresses the display of the RuleWorks copyright and version information.
+ The default is to display this information.
+
+2 /USEDIRECTORY=directory-spec
+
+ Specifies a directory where the RuleWorks compiled declaration (.USE) files
+ should be read from and written to.  The default is the current directory.

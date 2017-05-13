@@ -1,0 +1,168 @@
+.TH rulework 1 RISC "11 Oct 1994"
+.SH Name
+rulework \- RuleWorks (tm) compiler
+.SH Syntax
+.B rulework
+[
+.I option
+] ...
+.I file
+.SH Description
+The
+.PN rulework
+command invokes the Digital RuleWorks compiler, 
+.NXR "ruleworks"
+.NXR "rulework command"
+.NXR "Digital RuleWorks compiler"
+which compiles a RuleWorks source file into an ANSI C code file.
+This generated C file can then be manually compiled by
+an ANSI compliant C compiler, and the resulting object files can then
+be linked with the RuleWorks run-time library to produce an executable file.
+
+.P
+The
+.PN rulework
+compiler processes the single RuleWorks source file
+.I file
+and creates a C file with the same name as
+.I file
+except the
+.B .rul
+suffix is replaced with
+.BR .c .
+The default suffix for RuleWorks source files is
+.BR .rul .
+
+.SH Options
+Note that all of the options and associated keywords can be
+abbreviated to their unique leading substring.  Two characters are
+sufficient to be unique.
+
+.TP 14
+.B \-debug\fR[\fB=yes\fR|\fBno\fR|\fBmaybe\fR]
+Controls the inclusion of additional debugging information in the
+generated code, and the invocation of the RuleWorks language specific debugger.
+The default is
+.BR \-debug=no ,
+but if the option is specified without a value
+the default is
+.BR \-debug=yes .
+
+.IP
+With
+.B \-debug=yes
+the compiler includes the extra debugging information, and it
+generates code that invokes the RuleWorks debugger immediately after 
+starting the execution of any entry block in the file being compiled.
+
+.IP
+With
+.B \-debug=no
+the compiler does not include the extra debugging information,
+thus making it impossible to use the RuleWorks debugger on
+any entry block in the file being compiled.
+
+.IP
+With 
+.B \-debug=maybe
+the compiler includes the extra debugging information,
+but the invocation of the RuleWorks debugger is left to the programmer.
+In this case, the RuleWorks debugger can be invoked by either the execution
+of a
+.PN DEBUG
+action, or by a call to the API routine
+.PN rul_debug .
+
+.TP 14
+.B \-error\fR[\fB=\fIfile\fR]
+Reroutes the error messages to the specified file.  If no file name was
+specified, then the errors are placed into a file that is the source file
+name with a file type of 
+.B .err
+in the current directory.  By default all
+error messages are sent to standard error.
+
+.TP 14
+.B \-optimize\fR[\fB=reinvocation\fR|\fBspace\fR]
+Indicates to the compiler whether match information should be retained
+when an entry-block returns control to its caller.  The default,
+.BR \-optimize=space ,
+causes all match information to be freed when an entry-block returns.
+
+.IP
+With the
+.B \-optimize=reinvocation
+the compiler generates entry-blocks that retain match information when
+they return.  This option should only be used for source modules
+containing an entry-block that will be called repeatedly.  If the
+.B \-optimize
+qualifier is supplied without an argument, the compiler will
+optimize for reinvocation.
+
+.IP
+This option does not affect the run-time behavior in any way, 
+except the run-time memory requirements and the total execution time.  
+See the manual for more details.
+
+.TP 14
+.BI \-output= file
+Names the generated C output file.
+The default output file name is the source file name with a file type of
+.B .c
+in the current directory.
+
+.TP 14
+.B \-quiet
+This inhibits the display of the copyright and version number information.
+
+.TP 14
+.BI \-usedirectory= path
+Specifies a directory where the RuleWorks compiled declaration
+.RB ( .use )
+files should be read from and written to.  The default is 
+the current directory.
+
+.SH Examples
+The following example compiles the source file that contains module
+config.rul and generates the ANSI C file config.c:
+.EX
+rulework config.rul
+.EE
+.PP
+The next example compiles the file config.rul and produces an ANSI C 
+file with the name my_prog.c:
+.EX
+rulework -output=my_prog.c config.rul
+.EE
+
+.SH Files
+.TP 30
+.IB file .rul
+input file
+.TP 30
+.IB file .use
+compiled declarations file
+.TP 30
+.IB file .c
+output file
+.TP 30
+.PN /usr/bin/rulework
+Digital RuleWorks compiler
+.TP 30
+.PN /usr/lib/librulrtl.a
+Digital RuleWorks run-time library
+.TP 30
+.PN /usr/include/rul_gend.h
+C header file used by generated code
+.TP 30
+.PN /usr/include/rul_rtl.h
+C header file for the RuleWorks API
+.SH See Also
+.PP
+.I Guide to RuleWorks,
+Digital Equipment Corp, Maynard, MA 1994.
+.PP
+Cooper, Thomas and Nancy Wogrin,
+.I Rule-based Programming with RuleWorks.
+.br
+Morgan Kaufmann, San Mateo, CA 1988.

@@ -1,0 +1,28 @@
+
+define verb ruleworks
+	image RUL$LIBRARY:RULEWORK.EXE
+	parameter P1, label=INPUT, prompt="File",
+				value (required, type=$file)
+	qualifier DEBUG,        value (type=DEB_OPTS)
+	qualifier ERROR_FILE,   value (type=$file), nonnegatable
+	qualifier LIST_FILE,    value (type=$file), batch
+	qualifier NAMES,	value (required, type=NAM_OPTS), nonnegatable
+	qualifier OPTIMIZE,     value (type=OPT_OPTS), nonnegatable
+	qualifier OUTPUT_FILE,  value (type=$file)
+	qualifier USEDIRECTORY, value (required, type=$file), nonnegatable
+	qualifier QUIET
+
+define type DEB_OPTS
+	keyword YES, default
+	keyword NO
+	keyword MAYBE
+
+define type NAM_OPTS
+	keyword UPPER
+	keyword LOWER, default
+
+define type OPT_OPTS
+	keyword SPACE
+	keyword REINVOCATION, default
+
+
