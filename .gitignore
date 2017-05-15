@@ -1,4 +1,5 @@
 bin/*
 build/*.[aoch]
+build/strip_h
 library/*.a
 include/rul_gend.h
