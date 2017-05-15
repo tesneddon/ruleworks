@@ -143,7 +143,7 @@ RTS_OBJS_1 = 	 $(BLD)/beta.o     $(BLD)/cb_com.o   $(BLD)/cs.o       \
 
 RTS_OBJS_2 =	 $(BLD)/ml_arith.o $(BLD)/ml_preds.o $(BLD)/rac.o      \
 		 $(BLD)/rbs.o      $(BLD)/ref.o      $(BLD)/states.o   \
-		 $(BLD)/rts_sqlite.o
+		 $(BLD)/rts_sqlite.o		     $(BLD)/rts_sqlite_msg.o
 
 RTS_OBJS_3 =	 $(BLD)/wm_iter.o  $(BLD)/wm_print.o $(BLD)/wm_query.o \
 		 $(BLD)/wm_updat.o
@@ -552,6 +552,9 @@ $(BLD)/rbs.o : $(SRC)/rbs.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
 $(BLD)/rts_sqlite.o : $(SRC)/rts_sqlite.c
+	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
+
+$(BLD)/rts_sqlite_msg.o : $(SRC)/rts_sqlite_msg.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
 $(BLD)/ref.o : $(SRC)/ref.c
