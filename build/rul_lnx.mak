@@ -3,6 +3,7 @@
 # RuleWorks - Rules based application development tool.
 #
 # Copyright (C) 1999  Compaq Computer Corporation
+# Copyright (C) 2017  Endless Software Solutions
 #
 # This program is free software; you can redistribute it and/or modify it 
 # under the terms of the GNU General Public License as published by the 
@@ -95,62 +96,62 @@ lkflags   =
 #
 #	Rules.
 #
-.c.obj :
+.c.o :
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $<
 
 
 #
 #	Compiler Object Modules.
 #
-BOTH_LIB    =	 $(BLD)/rulboth.lib
-BOTH_OBJS_1 =	 $(BLD)/atomize.obj  $(BLD)/btree.obj    $(BLD)/decl_cls.obj \
-		 $(BLD)/decl_dec.obj $(BLD)/decl_ent.obj $(BLD)/decl_ext.obj
+BOTH_LIB    =	 $(BLD)/rulboth.a
+BOTH_OBJS_1 =	 $(BLD)/atomize.o  $(BLD)/btree.o    $(BLD)/decl_cls.o \
+		 $(BLD)/decl_dec.o $(BLD)/decl_ent.o $(BLD)/decl_ext.o
 
-BOTH_OBJS_2 =	 $(BLD)/decl_inh.obj $(BLD)/dyar.obj     $(BLD)/hash.obj     \
-		 $(BLD)/ios_file.obj 
+BOTH_OBJS_2 =	 $(BLD)/decl_inh.o $(BLD)/dyar.o     $(BLD)/hash.o     \
+		 $(BLD)/ios_file.o 
 
-BOTH_OBJS_3 = 	 $(BLD)/list.obj     $(BLD)/mem.obj      $(BLD)/ml_comps.obj \
-		 $(BLD)/ml_hash.obj  $(BLD)/ml_polys.obj $(BLD)/ml_print.obj
+BOTH_OBJS_3 = 	 $(BLD)/list.o     $(BLD)/mem.o      $(BLD)/ml_comps.o \
+		 $(BLD)/ml_hash.o  $(BLD)/ml_polys.o $(BLD)/ml_print.o
 
-BOTH_OBJS_4 =	 $(BLD)/ml_query.obj $(BLD)/ml_table.obj $(BLD)/msg.obj
+BOTH_OBJS_4 =	 $(BLD)/ml_query.o $(BLD)/ml_table.o $(BLD)/msg.o
 
-CMP_LIB    =	 $(BLD)/rulcomp.lib
-CMP_OBJS_1 =	 $(BLD)/c_anodes.obj $(BLD)/c_atypes.obj $(BLD)/c_cli.obj    \
-		 $(BLD)/c_conrg.obj  $(BLD)/c_cons.obj   $(BLD)/c_g_clas.obj
+CMP_LIB    =	 $(BLD)/rulcomp.a
+CMP_OBJS_1 =	 $(BLD)/c_anodes.o $(BLD)/c_atypes.o $(BLD)/c_cli.o    \
+		 $(BLD)/c_conrg.o  $(BLD)/c_cons.o   $(BLD)/c_g_clas.o
 
-CMP_OBJS_2 =	 $(BLD)/c_g_cons.obj $(BLD)/c_g_ctch.obj $(BLD)/c_g_decl.obj \
-		 $(BLD)/c_g_entr.obj $(BLD)/c_g_lvr.obj  $(BLD)/c_g_net.obj
+CMP_OBJS_2 =	 $(BLD)/c_g_cons.o $(BLD)/c_g_ctch.o $(BLD)/c_g_decl.o \
+		 $(BLD)/c_g_entr.o $(BLD)/c_g_lvr.o  $(BLD)/c_g_net.o
 
-CMP_OBJS_3 =	 $(BLD)/c_g_on.obj   $(BLD)/c_g_rhs.obj  $(BLD)/c_g_rb.obj \
-		 $(BLD)/c_lvar.obj   $(BLD)/c_msg.obj    $(BLD)/c_nt_nod.obj
+CMP_OBJS_3 =	 $(BLD)/c_g_on.o   $(BLD)/c_g_rhs.o  $(BLD)/c_g_rb.o \
+		 $(BLD)/c_lvar.o   $(BLD)/c_msg.o    $(BLD)/c_nt_nod.o
 
-CMP_OBJS_4 =	 $(BLD)/c_s_gvar.obj $(BLD)/c_s_acts.obj $(BLD)/c_s_blks.obj \
-		 $(BLD)/c_s_bnet.obj $(BLD)/c_s_bti.obj  $(BLD)/c_s_bval.obj
+CMP_OBJS_4 =	 $(BLD)/c_s_gvar.o $(BLD)/c_s_acts.o $(BLD)/c_s_blks.o \
+		 $(BLD)/c_s_bnet.o $(BLD)/c_s_bti.o  $(BLD)/c_s_bval.o
 
-CMP_OBJS_5 =	 $(BLD)/c_s_decl.obj $(BLD)/c_s_ext.obj  $(BLD)/c_s_on.obj   \
-		 $(BLD)/c_s_rhs.obj  $(BLD)/c_s_rule.obj $(BLD)/c_s_sql.obj
+CMP_OBJS_5 =	 $(BLD)/c_s_decl.o $(BLD)/c_s_ext.o  $(BLD)/c_s_on.o  \
+		 $(BLD)/c_s_rhs.o  $(BLD)/c_s_rule.o $(BLD)/c_s_sql.o
 
-CMP_OBJS_6 = 	 $(BLD)/c_nt_tst.obj $(BLD)/c_parser.obj $(BLD)/c_scan.obj   \
-		 $(BLD)/c_val.obj    $(BLD)/c_s_cls.obj  $(BLD)/c_s_cons.obj
+CMP_OBJS_6 = 	 $(BLD)/c_nt_tst.o $(BLD)/c_parser.o $(BLD)/c_scan.o   \
+		 $(BLD)/c_val.o    $(BLD)/c_s_cls.o  $(BLD)/c_s_cons.o
 
-EMIT_LIB   =	 $(BLD)/rulemit.lib
-EMIT_OBJS  =	 $(BLD)/c_ec_int.obj $(BLD)/c_ec_val.obj $(BLD)/c_ec_wrp.obj
+EMIT_LIB   =	 $(BLD)/rulemit.a
+EMIT_OBJS  =	 $(BLD)/c_ec_int.o $(BLD)/c_ec_val.o $(BLD)/c_ec_wrp.o
 
-RTS_LIB    =	 $(BLD)/rulrts.lib
-RTS_OBJS_1 = 	 $(BLD)/beta.obj     $(BLD)/cb_com.obj   $(BLD)/cs.obj       \
-		 $(BLD)/cvt_ext.obj  $(BLD)/delta.obj    $(BLD)/i18n_str.obj
+RTS_LIB    =	 $(BLD)/rulrts.a
+RTS_OBJS_1 = 	 $(BLD)/beta.o     $(BLD)/cb_com.o   $(BLD)/cs.o       \
+		 $(BLD)/cvt_ext.o  $(BLD)/delta.o    $(BLD)/i18n_str.o
 
-RTS_OBJS_2 =	 $(BLD)/ml_arith.obj $(BLD)/ml_preds.obj $(BLD)/rac.obj      \
-		 $(BLD)/rbs.obj      $(BLD)/ref.obj      $(BLD)/states.obj
+RTS_OBJS_2 =	 $(BLD)/ml_arith.o $(BLD)/ml_preds.o $(BLD)/rac.o      \
+		 $(BLD)/rbs.o      $(BLD)/ref.o      $(BLD)/states.o
 
-RTS_OBJS_3 =	 $(BLD)/wm_iter.obj  $(BLD)/wm_print.obj $(BLD)/wm_query.obj \
-		 $(BLD)/wm_updat.obj
+RTS_OBJS_3 =	 $(BLD)/wm_iter.o  $(BLD)/wm_print.o $(BLD)/wm_query.o \
+		 $(BLD)/wm_updat.o
 
-DBG_LIB    =	 $(BLD)/ruldbg.lib
-DBG_OBJS   =	 $(BLD)/cmd_pars.obj $(BLD)/dbg.obj $(BLD)/rts_scan.obj
+DBG_LIB    =	 $(BLD)/ruldbg.a
+DBG_OBJS   =	 $(BLD)/cmd_pars.o $(BLD)/dbg.o $(BLD)/rts_scan.o
 
-RTL_LIB    =     $(BLD)/rulrtl.lib
-RTL_OBJS   =	 $(BLD)/cb_atom.obj $(BLD)/cb_wmq.obj $(BLD)/cb_wms.obj
+RTL_LIB    =     $(BLD)/rulrtl.a
+RTL_OBJS   =	 $(BLD)/cb_atom.o $(BLD)/cb_wmq.o $(BLD)/cb_wms.o
 
 RT_SCAN    =	 INTERP
 
@@ -233,9 +234,9 @@ KIT	:	CMP RTL HDR EXAM
 # BUILD PROCEDURES
 # ****************
 
-$(BIN)/$(PRODUCT) : $(BLD)/c_main.obj $(CMP_LIB) $(EMIT_LIB) $(BOTH_LIB)
+$(BIN)/$(PRODUCT) : $(BLD)/c_main.o $(CMP_LIB) $(EMIT_LIB) $(BOTH_LIB)
 	$(link) $(lkflags) $(linkdebug) -o $(BIN)/$(PRODUCT) \
-	$(BLD)/c_main.obj $(CMP_LIB) $(EMIT_LIB) $(BOTH_LIB)
+	$(BLD)/c_main.o $(CMP_LIB) $(EMIT_LIB) $(BOTH_LIB)
 
 
 $(BOTH_LIB) :	$(BOTH_OBJS_1) $(BOTH_OBJS_2) $(BOTH_OBJS_3) $(BOTH_OBJS_4)
@@ -303,268 +304,268 @@ $(LIB)/$(RTLIB) :	$(RTL_OBJS) $(DBG_OBJS) $(RTS_OBJS_1) $(RTS_OBJS_2) $(RTS_OBJS
 	@ echo   ...  Library, $@, is up to date.
 	@ echo   ...
 
-$(INC)/rul_gend.h       :       $(BLD)/gend.h $(BLD)/strip_h.exe
-	$(BLD)/strip_h.exe $(BLD)/gend.h $(INC)/rul_gend.h
+$(INC)/rul_gend.h       :       $(BLD)/gend.h $(BLD)/strip_h
+	$(BLD)/strip_h $(BLD)/gend.h $(INC)/rul_gend.h
 
 $(BLD)/gend.h : $(HEADER_FILES)
 	cat $(HEADER_FILES) > $(BLD)/gend.h
 
-$(BLD)/strip_h.exe	:	$(BLD)/mem.obj $(BLD)/strip_h.obj
-	$(link) $(lkflags) $(linkdebug) -o $(BLD)/strip_h.exe \
-	$(BLD)/mem.obj $(BLD)/strip_h.obj
+$(BLD)/strip_h	:	$(BLD)/mem.o $(BLD)/strip_h.o
+	$(link) $(lkflags) $(linkdebug) -o $(BLD)/strip_h \
+	$(BLD)/mem.o $(BLD)/strip_h.o
 
 
 
 # **********************
 # COMPILATION PROCEDURES
 # **********************
-$(BLD)/strip_h.obj :	$(BLD)/strip_h.c
+$(BLD)/strip_h.o :	$(BLD)/strip_h.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/rts_scan.obj :	$(BLD)/rts_scan.c
+$(BLD)/rts_scan.o :	$(BLD)/rts_scan.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) -D$(RT_SCAN) $?
 
-$(BLD)/c_scan.obj :	$(BLD)/c_scan.c
+$(BLD)/c_scan.o :	$(BLD)/c_scan.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/cb_atom.obj : $(SRC)/cb_atom.c
+$(BLD)/cb_atom.o : $(SRC)/cb_atom.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) -DLOWERCASE_C_BIND $?
 
-$(BLD)/cb_wms.obj : $(SRC)/cb_wms.c
+$(BLD)/cb_wms.o : $(SRC)/cb_wms.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) -DLOWERCASE_C_BIND $?
 
-$(BLD)/cb_wmq.obj : $(SRC)/cb_wmq.c
+$(BLD)/cb_wmq.o : $(SRC)/cb_wmq.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) -DLOWERCASE_C_BIND $?
 
-$(BLD)/atomize.obj : $(BLD)/atomize.c
+$(BLD)/atomize.o : $(BLD)/atomize.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/btree.obj : $(SRC)/btree.c
+$(BLD)/btree.o : $(SRC)/btree.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_main.obj : $(SRC)/c_main.c
+$(BLD)/c_main.o : $(SRC)/c_main.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_conrg.obj : $(SRC)/c_conrg.c
+$(BLD)/c_conrg.o : $(SRC)/c_conrg.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_cli.obj : $(SRC)/c_cli.c
+$(BLD)/c_cli.o : $(SRC)/c_cli.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_cons.obj : $(SRC)/c_cons.c
+$(BLD)/c_cons.o : $(SRC)/c_cons.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/cmd_pars.obj : $(BLD)/cmd_pars.c
+$(BLD)/cmd_pars.o : $(BLD)/cmd_pars.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/cs.obj : $(SRC)/cs.c
+$(BLD)/cs.o : $(SRC)/cs.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/cvt_ext.obj : $(SRC)/cvt_ext.c
+$(BLD)/cvt_ext.o : $(SRC)/cvt_ext.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_anodes.obj : $(SRC)/c_anodes.c
+$(BLD)/c_anodes.o : $(SRC)/c_anodes.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_atypes.obj : $(SRC)/c_atypes.c
+$(BLD)/c_atypes.o : $(SRC)/c_atypes.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_g_clas.obj : $(SRC)/c_g_clas.c
+$(BLD)/c_g_clas.o : $(SRC)/c_g_clas.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_g_cons.obj : $(SRC)/c_g_cons.c
+$(BLD)/c_g_cons.o : $(SRC)/c_g_cons.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_g_ctch.obj : $(SRC)/c_g_ctch.c
+$(BLD)/c_g_ctch.o : $(SRC)/c_g_ctch.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_g_decl.obj : $(SRC)/c_g_decl.c
+$(BLD)/c_g_decl.o : $(SRC)/c_g_decl.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_g_entr.obj : $(SRC)/c_g_entr.c
+$(BLD)/c_g_entr.o : $(SRC)/c_g_entr.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_g_lvr.obj : $(SRC)/c_g_lvr.c
+$(BLD)/c_g_lvr.o : $(SRC)/c_g_lvr.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_g_net.obj : $(SRC)/c_g_net.c
+$(BLD)/c_g_net.o : $(SRC)/c_g_net.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_g_on.obj : $(SRC)/c_g_on.c
+$(BLD)/c_g_on.o : $(SRC)/c_g_on.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_g_rhs.obj : $(SRC)/c_g_rhs.c
+$(BLD)/c_g_rhs.o : $(SRC)/c_g_rhs.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_g_rb.obj : $(SRC)/c_g_rb.c
+$(BLD)/c_g_rb.o : $(SRC)/c_g_rb.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_ec_int.obj : $(SRC)/c_ec_int.c
+$(BLD)/c_ec_int.o : $(SRC)/c_ec_int.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_ec_val.obj : $(SRC)/c_ec_val.c
+$(BLD)/c_ec_val.o : $(SRC)/c_ec_val.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_ec_wrp.obj : $(SRC)/c_ec_wrp.c
+$(BLD)/c_ec_wrp.o : $(SRC)/c_ec_wrp.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_lvar.obj : $(SRC)/c_lvar.c
+$(BLD)/c_lvar.o : $(SRC)/c_lvar.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_msg.obj : $(SRC)/c_msg.c
+$(BLD)/c_msg.o : $(SRC)/c_msg.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_nt_nod.obj : $(SRC)/c_nt_nod.c
+$(BLD)/c_nt_nod.o : $(SRC)/c_nt_nod.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_nt_tst.obj : $(SRC)/c_nt_tst.c
+$(BLD)/c_nt_tst.o : $(SRC)/c_nt_tst.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_parser.obj : $(BLD)/c_parser.c
+$(BLD)/c_parser.o : $(BLD)/c_parser.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_gvar.obj : $(SRC)/c_s_gvar.c
+$(BLD)/c_s_gvar.o : $(SRC)/c_s_gvar.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_acts.obj : $(SRC)/c_s_acts.c
+$(BLD)/c_s_acts.o : $(SRC)/c_s_acts.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_blks.obj : $(SRC)/c_s_blks.c
+$(BLD)/c_s_blks.o : $(SRC)/c_s_blks.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_bnet.obj : $(SRC)/c_s_bnet.c
+$(BLD)/c_s_bnet.o : $(SRC)/c_s_bnet.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_bti.obj : $(SRC)/c_s_bti.c
+$(BLD)/c_s_bti.o : $(SRC)/c_s_bti.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_bval.obj : $(SRC)/c_s_bval.c
+$(BLD)/c_s_bval.o : $(SRC)/c_s_bval.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_cls.obj : $(SRC)/c_s_cls.c
+$(BLD)/c_s_cls.o : $(SRC)/c_s_cls.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_cons.obj : $(SRC)/c_s_cons.c
+$(BLD)/c_s_cons.o : $(SRC)/c_s_cons.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_decl.obj : $(SRC)/c_s_decl.c
+$(BLD)/c_s_decl.o : $(SRC)/c_s_decl.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_ext.obj : $(SRC)/c_s_ext.c
+$(BLD)/c_s_ext.o : $(SRC)/c_s_ext.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_on.obj : $(SRC)/c_s_on.c
+$(BLD)/c_s_on.o : $(SRC)/c_s_on.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_rhs.obj : $(SRC)/c_s_rhs.c
+$(BLD)/c_s_rhs.o : $(SRC)/c_s_rhs.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_rule.obj : $(SRC)/c_s_rule.c
+$(BLD)/c_s_rule.o : $(SRC)/c_s_rule.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_s_sql.obj : $(SRC)/c_s_sql.c
+$(BLD)/c_s_sql.o : $(SRC)/c_s_sql.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/c_val.obj : $(SRC)/c_val.c
+$(BLD)/c_val.o : $(SRC)/c_val.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/decl_cls.obj : $(SRC)/decl_cls.c
+$(BLD)/decl_cls.o : $(SRC)/decl_cls.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/decl_dec.obj : $(SRC)/decl_dec.c
+$(BLD)/decl_dec.o : $(SRC)/decl_dec.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/decl_ent.obj : $(SRC)/decl_ent.c
+$(BLD)/decl_ent.o : $(SRC)/decl_ent.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/decl_ext.obj : $(SRC)/decl_ext.c
+$(BLD)/decl_ext.o : $(SRC)/decl_ext.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/decl_inh.obj : $(SRC)/decl_inh.c
+$(BLD)/decl_inh.o : $(SRC)/decl_inh.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/dyar.obj : $(SRC)/dyar.c
+$(BLD)/dyar.o : $(SRC)/dyar.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/hash.obj : $(SRC)/hash.c
+$(BLD)/hash.o : $(SRC)/hash.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/ios_file.obj : $(SRC)/ios_file.c
+$(BLD)/ios_file.o : $(SRC)/ios_file.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/ios_win.obj : $(SRC)/ios_win.c
+$(BLD)/ios_win.o : $(SRC)/ios_win.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/list.obj : $(SRC)/list.c
+$(BLD)/list.o : $(SRC)/list.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/mem.obj : $(SRC)/mem.c
+$(BLD)/mem.o : $(SRC)/mem.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/ml_comps.obj : $(SRC)/ml_comps.c
+$(BLD)/ml_comps.o : $(SRC)/ml_comps.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/ml_hash.obj : $(SRC)/ml_hash.c
+$(BLD)/ml_hash.o : $(SRC)/ml_hash.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/ml_polys.obj: $(SRC)/ml_polys.c
+$(BLD)/ml_polys.o: $(SRC)/ml_polys.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/ml_print.obj : $(SRC)/ml_print.c
+$(BLD)/ml_print.o : $(SRC)/ml_print.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/ml_query.obj : $(SRC)/ml_query.c
+$(BLD)/ml_query.o : $(SRC)/ml_query.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/ml_table.obj : $(SRC)/ml_table.c
+$(BLD)/ml_table.o : $(SRC)/ml_table.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/msg.obj: $(SRC)/msg.c
+$(BLD)/msg.o: $(SRC)/msg.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/beta.obj : $(SRC)/beta.c
+$(BLD)/beta.o : $(SRC)/beta.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/cb_com.obj : $(SRC)/cb_com.c
+$(BLD)/cb_com.o : $(SRC)/cb_com.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/dbg.obj : $(SRC)/dbg.c
+$(BLD)/dbg.o : $(SRC)/dbg.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/delta.obj : $(SRC)/delta.c
+$(BLD)/delta.o : $(SRC)/delta.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/i18n_str.obj : $(SRC)/i18n_str.c
+$(BLD)/i18n_str.o : $(SRC)/i18n_str.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/ml_arith.obj : $(SRC)/ml_arith.c
+$(BLD)/ml_arith.o : $(SRC)/ml_arith.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/ml_preds.obj : $(SRC)/ml_preds.c
+$(BLD)/ml_preds.o : $(SRC)/ml_preds.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/rac.obj : $(SRC)/rac.c
+$(BLD)/rac.o : $(SRC)/rac.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/rbs.obj : $(SRC)/rbs.c
+$(BLD)/rbs.o : $(SRC)/rbs.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/ref.obj : $(SRC)/ref.c
+$(BLD)/ref.o : $(SRC)/ref.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/states.obj : $(SRC)/states.c
+$(BLD)/states.o : $(SRC)/states.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/wm_iter.obj : $(SRC)/wm_iter.c
+$(BLD)/wm_iter.o : $(SRC)/wm_iter.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/wm_print.obj : $(SRC)/wm_print.c
+$(BLD)/wm_print.o : $(SRC)/wm_print.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/wm_query.obj : $(SRC)/wm_query.c
+$(BLD)/wm_query.o : $(SRC)/wm_query.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
-$(BLD)/wm_updat.obj : $(SRC)/wm_updat.c
+$(BLD)/wm_updat.o : $(SRC)/wm_updat.c
 	$(cc) $(ccout) $@ $(cflags) $(cdebug) $?
 
 # ******************************
