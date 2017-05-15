@@ -47,9 +47,11 @@ Email: info@ruleworks.co.uk
 #include <sql_p.h>
 #include <sql.h>
 #include <callback.h>
+#include <sqlite3.h>
 
 #define TEST 1
 
+sqlite3 *handle;
 
 
 
@@ -63,31 +65,28 @@ Email: info@ruleworks.co.uk
  *	Declares the database schema which is to be attached to.
  */
 
-long rul__sql_attach (long  filenamep,	   /* bool, pathname vs file 2nd arg */
-		      char *schema_source, /* schema filename or path */
+long rul__sql_attach (long  flag,	   /* bool, pathname vs file 2nd arg */
+		      char *filename,	   /* schema filename or path */
 		      char *scope)	   /* scope of database keys */
 {
+  int     sql_status;                     /* return status from SQLite */
+  long    status;                         /* generic return status */
+
 /*===========================================================================*/
 
 #ifdef TEST
   printf ("\n Now in routine rul__sql_attach ... \n");
 #endif
 
-  /* Take a look at input arguments:
-   *	arg 1 => " { FILENAME (default) | PATHNAME }  DB-NAME"
-   *	arg 2 => " { ATTACH | TRANSACTION } "  (default = TRANSACTION)
-   *
-   * First two args must always be provided by caller;
-   * they specifiy the schema source.
-   * Check that 2st arg at least appears to be valid:
-   */
-
-  /*------------------------------------------------------------------------*/
-  /* Arg3 is the DBKEY scope, which may be either the ATTACH or TRANSACTION 
-   * keywords only:
-   */
-    
-  return RUL_SQL_SUCCESS;
+  sql_status = sqlite3_open_v2(filename, &handle,
+			       SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE, 0);
+  if (sql_status != SQLITE_OK) {
+    rul___sql_message(SQL_SQLATTFAI, sqlite3_errstr(sql_status)); 
+    status = RUL_SQL_ERROR;
+  } else {
+    status = RUL_SQL_SUCCESS;
+  }
+  return status;
 }					/* End of rul__sql_attach */
 
 
@@ -214,15 +213,26 @@ long  rul__sql_delete (char *table, /* table from which rec to be deleted */
 
 long  rul__sql_detach (void)
 {
-  long     sql_status;                     /* return status from SQL mod rtn */
-  long     status;                         /* generic return status */
+  long     sql_status;                     /* return status from SQLite */
+  int      status;                         /* generic return status */
 
   /*=======================================================================*/
 #ifdef TEST
   printf ("\n Now in routine rul__sql_detach ... \n");
 #endif
 
-  return RUL_SQL_SUCCESS;
+  if (handle == 0)
+    return RUL_SQL_SUCCESS;
+
+  sql_status = sqlite3_close(handle);
+  if (sql_status != SQLITE_OK) {
+    rul___sql_message(SQL_SQLDETFAI, sqlite3_errstr(sql_status)); 
+    status = RUL_SQL_ERROR;
+  } else {
+    status = RUL_SQL_SUCCESS;
+  }
+
+  return status;
 }					/* End of rul__sql_detach */
 
 
@@ -526,5 +536,3 @@ long  rul__sql_update_from_wme (Molecule  wme_id,
 #endif
   return RUL_SQL_SUCCESS;
 }			/* end of routine rul__sql_update_from_wme */
-
-
